@@ -16,11 +16,18 @@ The function should:
 */
 
 
-function createMenuItem(/*Your code here*/){
-  /*Your code here*/
-}
+function createMenuItem(menuItem, priceVal, categ){
+  // creats a new object, and inputs the parameters as the values
+  const newMenu = {
+    name: menuItem,
+    price: priceVal,
+    category: categ,
+  };
+  return newMenu;
 
+  }
 
+  console.log(createMenuItem('tacos', 8, 'Lunch'))
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 1b (not auto-tested): 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Invoke your function!
@@ -32,7 +39,11 @@ Test your createMenuItems function by doing the following:
   For example: createMenuItem("pizza",5,"lunch") would return this as the object: {name:"Pizza",price:5,category:"lunch"}
 */
 
-
+// assigns variables to the new objects created inside the functions
+const stuffedCroissant = createMenuItem('Stuffed Croissant', 12, 'Lunch')
+const pizzaDelux = createMenuItem('Pizza Delux', 15, 'Dinner')
+const smoothieWonder = createMenuItem('Smoothie Wonder', 7, 'Brunch')
+console.log(stuffedCroissant, pizzaDelux, smoothieWonder)
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 You're having a lunch special! 25% off for teachers and students, 10% off for everyone else. Add a method to the burger object below that automatically calculates price depending on the string received as a parameter. 
@@ -54,6 +65,29 @@ const burger = {
   
 }
 
+// creating a new property in the original burger object
+// as the name of the function is actually the property name, the parameter goes in the parentheses next to the word "function"
+burger.discount = function(person){
+
+  let pers = person.toLowerCase();
+  // making it so every parameter that goes in will be read by the code
+  if(pers === "teacher" || pers === "student") {
+    let newPrice = this.price * 0.25;
+    //creating a new price that creates the discount amount that will be deducted
+
+    return this.price - newPrice
+    //returning the price that they will actually pay
+  } else if (pers === "public"){
+    let newPrice = this.price * 0.10;
+    return this.price - newPrice
+  } else {
+    return 'something is wrong.'
+  }
+};
+
+console.log(burger.discount('student'))
+
+
 
 
 ///////////////Reviews (MVP)///////////////////
@@ -73,6 +107,16 @@ Using the reviews array above:
   1. log only Julius' feedback to the console - no function needed 
 */
 
+//loops though the entire reviews array, and searches for the specific name "Julius"
+for(let i = 0; i<reviews.length; i++) {
+  if(reviews[i].name.includes('Julius')){
+  console.log(reviews.indexOf(reviews[i]))
+}
+//console logs the index of
+//because you only need the index of the object in the array, you just need arrayname.indexOf(arrayname['i' because it's the loop's integer we're tracking])
+}
+
+console.log(reviews[5]['feedback'])
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4 (not auto-tested): 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -81,7 +125,8 @@ Reyna's feedback is missing! Use what you know to do the following: (no function
   2. log the reviews array to the console to check your work
 */
 
-
+reviews[7].feedback = "this place is chill with really cool people, great for getting work done on weekdays"
+console.log(reviews)
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Write a function that creates an object with name, rating, feedback, add the new review to the end of an array and returns the resulting array
@@ -93,9 +138,21 @@ Write a function that creates an object with name, rating, feedback, add the new
 */
 
 
-function addReview(/*Your Code Here */){
-  /*Your Code Here */
+function addReview(arr, newName, newRating, newFeed){
+  const newReview = {}
+  // creates a new object to put the new info in
+
+  newReview.name = newName;
+  newReview.rating = newRating;
+  newReview.feedback = newFeed;
+  // assigns the new info to a property in the empty object
+
+  const finalArray = arr.concat(newReview)
+  // attaches the final object with the pre-existing array parameter
+  return finalArray;
 }
+
+console.log(addReview(reviews, 'Daniela', 5, 'Beautiful atmosphere and wonderful vegan options!'))
 
 
 
@@ -110,10 +167,17 @@ Use the getReviewByIndex function below to do the following:
 */
 
 
-function getReviewByIndex(/*Your code here*/) {
-  /*Your code here*/
+function getReviewByIndex(arr, indexNum) {
+      let name = arr[indexNum].name;
+      let rating = arr[indexNum].rating
+      let feedback = arr[indexNum].feedback
+      // takes the index number, and returns the wanted value to a variable to use in final sentence
+
+  let returnReview = `${name} gave the restaurant a ${rating} star review, and their feedback was: ${feedback}`
+return returnReview;
 }
 
+console.log(getReviewByIndex(reviews, 4))
   
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 7: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -129,10 +193,17 @@ Use the getLastReview function below to do the following:
 */
 
 
-function getLastReview(/*Your code here*/) {
-  /*Your code here*/
+function getLastReview(arr) {
+  
+  // assigning the final index as a variable to reuse
+  let final = arr[arr.length -1]
+
+  // using the "final" var to use as a place holder for the array's last place, followed by the needed key property
+  let finalReview = `${final.name} gave the restaurant a ${final.rating} star review, and their feedback was: ${final.feedback}`
+  return finalReview
 } 
 
+console.log(getLastReview(reviews))
 
 
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
