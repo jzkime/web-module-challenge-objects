@@ -177,7 +177,7 @@ function getReviewByIndex(arr, indexNum) {
 return returnReview;
 }
 
-console.log(getReviewByIndex(reviews, 4))
+console.log(getReviewByIndex(reviews, 0))
   
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 7: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
@@ -198,7 +198,7 @@ function getLastReview(arr) {
   // assigning the final index as a variable to reuse
   let final = arr[arr.length -1]
 
-  // using the "final" var to use as a place holder for the array's last place, followed by the needed key property
+  // using the "final" var as a placeholder for the array's last place, followed by the needed key property
   let finalReview = `${final.name} gave the restaurant a ${final.rating} star review, and their feedback was: ${final.feedback}`
   return finalReview
 } 
@@ -222,9 +222,24 @@ Use the getReviewsByRating function below to do the following:
   ]
 */
 
- function getReviewByRating(/* code here */) {
-    /* code here */
-  }
+ function getReviewByRating(arr, rangeNum) {
+   const range = [];
+
+   let rangeInp = Math.floor(rangeNum)
+   // round down the input, just incase
+
+   for(let i=0; i<arr.length; i++){
+     let rate = Math.floor(arr[i].rating)
+     // round down all ratings
+     if(rangeInp === rate){
+        range.push(arr[i])
+     }
+   }
+
+  return range;
+}
+
+console.log(getReviewByRating(reviews, 4))
 
   
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 2: 💪💪💪💪💪💪💪💪💪💪   
@@ -240,10 +255,23 @@ Use the getLongReviews function below to do the following:
   ]
 */
 
-function getLongReviews(/* code here */) {
-    /* code here */
+function getLongReviews(arr) {
+  const longRev = [];
+// new array for the reviews we're looking for to go
+
+  for(let i=0; i<arr.length; i++){
+
+    let feed = arr[i].feedback.split(' ');
+    if(feed.length > 15) {
+      longRev.push(arr[i])
+    }
+    
   }
-  
+
+  return longRev;
+}
+console.log(getLongReviews(reviews))
+
 
 /* 💪💪💪💪💪💪💪💪💪💪 STRETCH 3: 💪💪💪💪💪💪💪💪💪💪 
 This stretch goal does not use the reviews data!  You create your own object in this stretch goal.
@@ -262,11 +290,25 @@ Use the carMaker function below to do the following:
   It would return 110 because it was created with 10 as the odometer and we added 100 to it with the drive method 
 */
 
+const cars = [];
 
-function carMaker(/* code here */) {
-    /* code here */
-    
+function carMaker(odo) {
+    const car = {
+      odometer: odo,
+      drive: function(distance){
+        //odometer increases
+        
+        return this.odometer = odo + distance;;
+      }
+
+    }
+    return car;
 }
+let newCar = carMaker(100)
+cars.push(newCar)
+
+console.log(cars)
+console.log(cars[0].drive(10))
 
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
